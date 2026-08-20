@@ -1,76 +1,154 @@
-# Smart Agri-Advisory Platform with Crop & Input Recommendation
+<div align="center">
 
-Full source code for the CSE347 project — a role-based (RBAC) web platform
-that recommends crops, fertilizer, market timing, and (optionally) detects
-pest/disease from soil, weather, and historical data for Bangladeshi
-farmers. Built against the 26-table normalized database schema
-(users / climate_zones / crops / farm_profiles / recommendations / ...).
+# 🌾 Smart Agri-Advisory Platform 🌾
+### AI-চালিত ফসল ও ইনপুট সুপারিশ সিস্টেম | বাংলাদেশি কৃষকদের জন্য
 
-## Architecture
+**একটি Role-Based (RBAC) ওয়েব প্ল্যাটফর্ম যা মাটি, আবহাওয়া ও ঐতিহাসিক ডেটা বিশ্লেষণ করে**
+**ফসল, সার, বাজার-সময় এবং রোগ শনাক্তকরণের সুপারিশ দেয়**
+
+🔗 **Live:** [agriadvisory.app](http://agriadvisory.app)
+
+![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-ML%20Service-000000?style=for-the-badge&logo=flask&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-26%20Tables-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Azure](https://img.shields.io/badge/Deployed%20on-Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![License](https://img.shields.io/badge/License-Academic-9C27B0?style=for-the-badge)
+
+</div>
+
+---
+
+## ✨ কেন এই প্রজেক্ট?
+
+> বাংলাদেশের ছোট ও মাঝারি কৃষকদের জন্য সঠিক ফসল নির্বাচন, সঠিক সারের পরিমাণ আর সঠিক সময়ে বিক্রি করা — এই তিনটি সিদ্ধান্তই আয়ের সবচেয়ে বড় নির্ধারক। **Smart Agri-Advisory Platform** এই তিনটি সিদ্ধান্তকেই ডেটা-চালিত এবং স্বয়ংক্রিয় করে তোলে — একদম মাঠ পর্যায়ের কৃষক থেকে শুরু করে কৃষি সম্প্রসারণ কর্মকর্তা, সরবরাহকারী এবং অ্যাডমিন পর্যন্ত — সবার জন্য একটি সমন্বিত সিস্টেমে।
+
+<table align="center">
+<tr>
+<td align="center">🌱<br><b>ফসল সুপারিশ</b><br><sub>Random Forest · ~৮৩% নির্ভুলতা</sub></td>
+<td align="center">🧪<br><b>সার সুপারিশ</b><br><sub>Rule-based + k-NN</sub></td>
+<td align="center">📈<br><b>বাজার পূর্বাভাস</b><br><sub>Sequence / LSTM Model</sub></td>
+<td align="center">🍃<br><b>রোগ শনাক্তকরণ</b><br><sub>CNN (Scaffolded)</sub></td>
+</tr>
+</table>
+
+---
+
+## 🏗️ আর্কিটেকচার
 
 ```
-┌───────────────────────┐        HTTP/Axios        ┌─────────────────────────┐
-│  Laravel 11 + Blade    │ ───────────────────────▶ │  Flask ML Microservice  │
-│  (RBAC, MySQL, UI)     │ ◀─────────────────────── │  (Random Forest, k-NN,  │
-│  laravel-backend/      │        JSON              │   sequence/LSTM model)  │
-└───────────────────────┘                           │  ml-service/            │
-                                                     └─────────────────────────┘
+┌────────────────────────────┐         HTTP / Axios        ┌──────────────────────────────┐
+│   🖥️  Laravel 11 + Blade     │ ───────────────────────────▶ │   🧠  Flask ML Microservice   │
+│   RBAC · MySQL · Bengali UI  │ ◀─────────────────────────── │   Random Forest · k-NN · LSTM │
+│   laravel-backend/           │            JSON              │   ml-service/                 │
+└────────────────────────────┘                              └──────────────────────────────┘
 ```
 
-- **laravel-backend/** — the web app: RBAC auth, farm profiles (soil pH/N/P/K
-  live directly on `farm_profiles`), recommendations, fertilizer/price/pest
-  history, Extension Officer verification/override/advisory/alerts/training,
-  Supplier products/orders/inquiries, Admin master-data/retrain/backup/
-  analytics. Bengali UI. See `laravel-backend/README.md` for the full
-  schema-to-code map.
-- **ml-service/** — the Python Flask microservice: crop recommendation
-  (Random Forest, trained & tested), fertilizer (rule-based + k-NN),
-  price forecast (sequence model, LSTM-swappable), pest/disease CNN
-  (architecture ready, needs real image data to train). See
-  `ml-service/README.md`.
+| স্তর | প্রযুক্তি | দায়িত্ব |
+|---|---|---|
+| 🌐 **Web App** | Laravel 11, Blade, MySQL | RBAC, ফার্ম প্রোফাইল (মাটির pH/N/P/K), সুপারিশ ম্যানেজমেন্ট, অ্যাডমিন প্যানেল |
+| 🤖 **ML Service** | Python, Flask, scikit-learn | ফসল/সার প্রেডিকশন, মূল্য পূর্বাভাস, রোগ শনাক্তকরণ API |
+| ☁️ **Hosting** | Azure App Service | দুটি সার্ভিসই আলাদাভাবে ডিপ্লয়েড, Custom domain + SSL |
 
-## Quick start
+---
+
+## 🚀 কুইক স্টার্ট
+
+### ১️⃣ ML Service চালু করা
 
 ```bash
-# Terminal 1 — ML service
 cd ml-service
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-python generate_data.py && python train_crop_model.py && python price_forecast.py
-python app.py                      # -> http://localhost:5000
 
-# Terminal 2 — Laravel app
-cd laravel-backend
-composer install
-cp .env.example .env && php artisan key:generate
-php artisan migrate --seed
-php artisan serve                  # -> http://localhost:8000
+python generate_data.py         # 🔄 সিন্থেটিক ডেটাসেট তৈরি
+python train_crop_model.py      # 🌾 Random Forest ট্রেইন
+python price_forecast.py        # 📊 মূল্য মডেল ট্রেইন
+
+python app.py                   # ➜ http://localhost:5000
 ```
 
-Log in with a seeded demo account (see `laravel-backend/README.md`) and try:
-add a farm profile (zone + soil pH/N/P/K) → get a crop recommendation →
-get a fertilizer recommendation using that recommendation's ID → check the
-price forecast → (as Extension Officer) verify the farm profile and
-override/advise → (as Admin) approve pending accounts and view analytics.
+### ২️⃣ Laravel App চালু করা
 
-## What's real vs. what's a scaffold
+```bash
+cd laravel-backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
 
-- **Real & tested in this repo:** crop Random Forest model (~83% accuracy
-  on synthetic data), fertilizer rule+kNN engine, price sequence
-  forecaster — trained, and the full Flask API tested end-to-end with curl.
-- **Scaffolded, needs your data:** the pest/disease CNN needs real labeled
-  leaf images (none bundled); the literal Keras LSTM script
-  (`ml-service/train_lstm_keras.py`) needs `pip install tensorflow`.
-- **Needs `composer install` locally:** the Laravel backend, since this
-  sandbox cannot reach Packagist.
+php artisan serve               # ➜ http://localhost:8000
+```
 
-## Next steps for your group
+> 📖 সিডেড ডেমো অ্যাকাউন্ট এবং সম্পূর্ণ schema-to-code ম্যাপের জন্য দেখুন → `laravel-backend/README.md`
 
-1. Replace `ml-service/data/crop_data.csv` with real BARI data, then
-   re-run `train_crop_model.py` — no other code changes needed.
-2. Collect a small leaf-disease image set and run `pest_cnn.py --train`.
-3. Wire `OPENWEATHER_API_KEY` in `.env` and populate `weather_logs` on a
-   schedule (e.g. `php artisan schedule` + a new `WeatherService`) so crop
-   recommendations use live weather instead of the fallback defaults.
-4. Add `php artisan make:test` coverage for the controllers if your course
-   wants automated tests as part of grading.
+### ৩️⃣ ফিচারগুলো এভাবে টেস্ট করুন
+
+```
+👤 ফার্ম প্রোফাইল যোগ করুন (জোন + মাটির pH/N/P/K)
+        ↓
+🌾 ফসল সুপারিশ নিন
+        ↓
+🧪 ওই সুপারিশ আইডি দিয়ে সার সুপারিশ নিন
+        ↓
+📈 বাজার মূল্যের পূর্বাভাস দেখুন
+        ↓
+👨‍🌾 Extension Officer হিসেবে যাচাই / override / পরামর্শ দিন
+        ↓
+🛡️ Admin হিসেবে পেন্ডিং অ্যাকাউন্ট অনুমোদন ও অ্যানালিটিক্স দেখুন
+```
+
+---
+
+## 📦 কী আছে প্রজেক্টে (26-Table Normalized Schema)
+
+<details>
+<summary><b>🗂️ মূল মডিউলগুলো দেখতে ক্লিক করুন</b></summary>
+
+| মডিউল | বিবরণ |
+|---|---|
+| `users` / RBAC | কৃষক, Extension Officer, Supplier, Admin — চার ধরনের রোল |
+| `climate_zones` / `crops` | জলবায়ু অঞ্চল ও ফসলের মাস্টার ডেটা |
+| `farm_profiles` | কৃষকের জমির তথ্য — মাটির pH, N, P, K সরাসরি টেবিলে |
+| `recommendations` | ফসল, সার, মূল্য সংক্রান্ত সব সুপারিশের লগ |
+| ফার্টিলাইজার / প্রাইস / পেস্ট হিস্ট্রি | ঐতিহাসিক ডেটা ট্র্যাকিং |
+| Extension Officer টুলস | verification, override, advisory, alerts, training |
+| Supplier মডিউল | products, orders, inquiries |
+| Admin প্যানেল | master-data ম্যানেজমেন্ট, retrain ট্রিগার, backup, অ্যানালিটিক্স |
+
+</details>
+
+---
+
+## ✅ কী সত্যিকারভাবে কাজ করছে vs 🚧 কী এখনো স্ক্যাফোল্ড
+
+| স্ট্যাটাস | কম্পোনেন্ট | বিস্তারিত |
+|:---:|---|---|
+| ✅ **রেডি ও টেস্টেড** | ফসল Random Forest মডেল | সিন্থেটিক ডেটায় ~৮৩% নির্ভুলতা |
+| ✅ **রেডি ও টেস্টেড** | সার সুপারিশ ইঞ্জিন | Rule-based + k-NN |
+| ✅ **রেডি ও টেস্টেড** | মূল্য পূর্বাভাস মডেল | Sequence model, curl দিয়ে end-to-end টেস্টেড |
+| 🚧 **স্ক্যাফোল্ড** | পেস্ট/ডিজিজ CNN | রিয়েল লিফ ইমেজ ডেটা দরকার |
+| 🚧 **স্ক্যাফোল্ড** | Keras LSTM স্ক্রিপ্ট | `pip install tensorflow` প্রয়োজন |
+| ⚙️ **লোকাল সেটআপ প্রয়োজন** | Laravel backend | `composer install` — sandbox থেকে Packagist অ্যাক্সেসযোগ্য নয় |
+
+---
+
+## 🎯 পরবর্তী ধাপ (Next Steps)
+
+- [ ] `ml-service/data/crop_data.csv` কে রিয়েল BARI ডেটা দিয়ে প্রতিস্থাপন করে `train_crop_model.py` পুনরায় চালান
+- [ ] একটি ছোট leaf-disease ইমেজ সেট সংগ্রহ করে `pest_cnn.py --train` চালান
+- [ ] `.env`-এ `OPENWEATHER_API_KEY` যুক্ত করে `weather_logs`-এ শিডিউল অনুযায়ী রিয়েল আবহাওয়া ডেটা পপুলেট করুন
+- [ ] গ্রেডিং-এর জন্য কন্ট্রোলারগুলোতে `php artisan make:test` কভারেজ যোগ করুন
+
+---
+
+<div align="center">
+
+### 🌍 Live Deployment
+**🔗 [agriadvisory.app](http://agriadvisory.app)**
+
+Made with 💚 for Bangladeshi Farmers | CSE347 Project
+
+![Bangladesh](https://img.shields.io/badge/Made%20for-🇧🇩%20Bangladesh-006A4E?style=for-the-badge)
+
+</div>
