@@ -1,9 +1,9 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:006A4E,100:2E8B57&height=200&section=header&text=Smart%20Agri-Advisory%20Platform&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=AI-Powered%20Crop%20%26%20Input%20Recommendation%20System%20for%20Bangladeshi%20Farmers&descAlignY=55&descSize=18" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:006A4E,100:2E8B57&height=200&section=header&text=Smart%20Agri-Advisory%20Platform&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=AI-Powered%20Crop%20and%20Input%20Recommendation%20System%20for%20Bangladeshi%20Farmers&descAlignY=55&descSize=18" width="100%"/>
 
 <a href="http://agriadvisory.app">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=2E8B57&center=true&vCenter=true&width=700&lines=Role-Based+(RBAC)+Web+Platform+%F0%9F%8C%BE;Analyzes+Soil%2C+Weather+%26+Historical+Data;Recommends+Crops%2C+Fertilizer%2C+Market+Timing+%26+More;Built+for+Bangladeshi+Farmers+%F0%9F%87%A7%F0%9F%87%A9" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=2E8B57&center=true&vCenter=true&width=700&lines=Role-Based+(RBAC)+Web+Platform+%F0%9F%8C%BE;Analyzes+Soil%2C+Weather%2C+and+Historical+Data;Recommends+Crops%2C+Fertilizer%2C+Market+Timing%2C+and+More;Built+for+Bangladeshi+Farmers+%F0%9F%87%A7%F0%9F%87%A9" alt="Typing SVG" />
 </a>
 
 <br/>
