@@ -158,6 +158,6 @@ flowchart LR
 ### 🌍 Live Deployment
 **🔗 [agriadvisory.app](http://agriadvisory.app)**
 
-Made with 💚 for Bangladeshi Farmers | CSE479 / CSE347 Project
+Made with for Bangladeshi Farmers
 
 </div>
