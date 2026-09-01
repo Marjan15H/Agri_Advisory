@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🧠 ML Microservice — Smart Agri-Advisory Platform
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:F7931E,100:2E7D32&height=200&section=header&text=ML%20Microservice&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Smart%20Agri-Advisory%20Platform&descAlignY=55&descSize=20" width="100%"/>
 
-### Flask · Random Forest · Real Kaggle Dataset — ফসল, সার ও মূল্য পূর্বাভাস API
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=800&color=F7931E&center=true&vCenter=true&width=650&lines=Flask+%C2%B7+Random+Forest+%C2%B7+Real+Kaggle+Dataset;Crop+%2B+Fertilizer+%2B+Price+Forecast+API;99.3%25+Test+Accuracy+%F0%9F%8E%AF" alt="Typing SVG" />
 
 ![Flask](https://img.shields.io/badge/Flask-ML%20API-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -14,32 +14,32 @@
 
 ---
 
-## 📌 এক নজরে
+## 📌 Overview
 
-এই ফোল্ডারে আছে **Flask ML মাইক্রোসার্ভিস** — Laravel backend থেকে HTTP কল পেয়ে ফসল, সার, বাজার-মূল্য এবং (পরবর্তীতে) রোগ শনাক্তকরণের পূর্বাভাস রিটার্ন করে।
+This folder contains the **Flask ML microservice** — it receives HTTP calls from the Laravel backend and returns predictions for crops, fertilizer, market prices, and (later) pest/disease detection.
 
-> 🎉 **আপডেট:** ফসল সুপারিশ মডেল এখন প্রশিক্ষিত হয়েছে বাস্তব **Kaggle "Crop Recommendation Dataset"** দিয়ে — ২২০০ রো, ২২টি ফসল (N, P, K, temperature, humidity, ph, rainfall)। সিন্থেটিক ডেটা থেকে সরে এসে এখন এটি সত্যিকারের কৃষি ডেটার উপর কাজ করছে।
+> 🎉 **Update:** The crop recommendation model is now trained on the real **Kaggle "Crop Recommendation Dataset"** — 2,200 rows, 22 crops (N, P, K, temperature, humidity, ph, rainfall). It has moved on from synthetic data and now works on genuine agricultural data.
 
 <div align="center">
 
-| 📊 মেট্রিক | মান |
+| 📊 Metric | Value |
 |:---:|:---:|
-| **Test Accuracy** | 🎯 **৯৯.৩%** |
-| **ডেটাসেট সাইজ** | 2,200 রো |
-| **ফসলের সংখ্যা** | 22টি লেবেল |
-| **ফিচার** | 7টি (N, P, K, তাপমাত্রা, আর্দ্রতা, pH, বৃষ্টিপাত) |
+| **Test Accuracy** | 🎯 **99.3%** |
+| **Dataset Size** | 2,200 rows |
+| **Number of Crops** | 22 labels |
+| **Features** | 7 (N, P, K, temperature, humidity, pH, rainfall) |
 
 </div>
 
-**ডেটা ফাইল:**
-- `data/Crop_recommendation.csv` — মূল Kaggle ডেটাসেট
-- `data/crop_data.csv` — এই সার্ভিসের কলাম-নেম অনুযায়ী রিনেম করা
+**Data files:**
+- `data/Crop_recommendation.csv` — the original Kaggle dataset
+- `data/crop_data.csv` — renamed to match this service's column names
 
-> ⚠️ **নোট:** বাস্তব ডেটাসেটে কোনো `climate_zone` কলাম নেই, তাই `/api/predict/crop`-এ এখন `climate_zone` আর আবশ্যিক ফিল্ড নয় — মডেল শুধু ৭টি মাটি/আবহাওয়া ফিচার ব্যবহার করে। সার এবং price-forecast-এর ফসলের নামগুলোও এখন বাস্তব ডেটাসেটের ২২টি লেবেলের সাথে মিলিয়ে দেওয়া হয়েছে (rice, maize, chickpea, banana, mango, cotton, jute, coffee, ...) — আগের বাংলাদেশ-স্টাইল নামের বদলে। সম্পূর্ণ তালিকার জন্য দেখুন `fertilizer.py`-এর `BASE_DOSAGE` dict।
+> ⚠️ **Note:** The real dataset has no `climate_zone` column, so `climate_zone` is no longer a required field in `/api/predict/crop` — the model relies only on the 7 soil/weather features. Crop names for fertilizer and price-forecast have also been aligned with the real dataset's 22 labels (rice, maize, chickpea, banana, mango, cotton, jute, coffee, ...) instead of the earlier Bangladesh-style names. See the `BASE_DOSAGE` dict in `fertilizer.py` for the full list.
 
 ---
 
-## 🚀 সেটআপ
+## 🚀 Setup
 
 ```bash
 cd ml-service
@@ -48,18 +48,18 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## 🏋️ মডেল ট্রেইন করা (প্রথমবার চালানোর সময়)
+## 🏋️ Training the Models (first run)
 
 ```bash
-python train_crop_model.py      # 🌾 বাস্তব ডেটাসেটে Random Forest ট্রেইন + সেভ
-python price_forecast.py        # 📈 মূল্য পূর্বাভাস মডেল ট্রেইন + সেভ
+python train_crop_model.py      # 🌾 Train + save Random Forest on the real dataset
+python price_forecast.py        # 📈 Train + save the price forecast model
 ```
 
-## ▶️ API চালু করা
+## ▶️ Starting the API
 
 ```bash
 python app.py
-# ➜ http://localhost:5000 (অথবা তোমার সেট করা পোর্ট)
+# ➜ http://localhost:5000 (or the port you've configured)
 ```
 
 ---
@@ -80,9 +80,9 @@ python app.py
 
 ---
 
-## 🧪 টেস্ট ডেটা
+## 🧪 Test Data
 
-`data/test_samples.csv`-এ বাস্তব ডেটাসেট থেকে প্রতিটি ফসলের জন্য একটি করে representative রো আছে — সাইনআপ ছাড়াই farmer dashboard বা curl/Postman দিয়ে দ্রুত প্রেডিকশন যাচাই করতে এগুলো ব্যবহার করুন:
+`data/test_samples.csv` contains one representative row per crop from the real dataset — use these to quickly verify predictions via the farmer dashboard or curl/Postman, without needing to sign up:
 
 ```csv
 crop,soil_ph,nitrogen,phosphorus,potassium,rainfall_mm,temperature_c,humidity_pct
@@ -92,7 +92,7 @@ chickpea,7.49,40,72,77,88.55,17.02,16.99
 ...
 ```
 
-**উদাহরণ curl কল:**
+**Example curl call:**
 
 ```bash
 curl -X POST http://localhost:5000/api/predict/crop \
@@ -110,7 +110,7 @@ curl -X POST http://localhost:5000/api/predict/crop \
 
 ---
 
-## 🔄 ডেটা ফ্লো
+## 🔄 Data Flow
 
 ```
 Laravel FarmerController
@@ -119,7 +119,7 @@ Laravel FarmerController
 Flask /api/predict/crop  ──▶  🌾 Random Forest (99.3% accuracy)
         │
         ▼
-ফসলের নাম রিটার্ন  ──▶  Laravel-এ crops.id-তে রিজলভ
+Returns crop name  ──▶  resolved to crops.id in Laravel
         │
         ▼
 /api/predict/fertilizer  ──▶  🧪 Rule-based + k-NN
@@ -134,6 +134,8 @@ Flask /api/predict/crop  ──▶  🌾 Random Forest (99.3% accuracy)
 
 🔗 **Live App:** [agriadvisory.app](http://agriadvisory.app)  ·  📦 **Repo:** [Agri_Advisory](https://github.com/Marjan15H/Agri_Advisory)
 
-Made with 💚 for Bangladeshi Farmers | CSE347 Project
+Made with for Bangladeshi Farmers
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:2E7D32,100:F7931E&height=100&section=footer" width="100%"/>
 
 </div>
