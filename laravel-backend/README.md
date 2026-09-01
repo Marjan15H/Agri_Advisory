@@ -102,7 +102,7 @@ public/js/app.js             Axios helper functions
 
 🔗 **Live App:** [agriadvisory.app](http://agriadvisory.app)  ·  📦 **Repo:** [Agri_Advisory](https://github.com/Marjan15H/Agri_Advisory)
 
-Made with 💚 for Bangladeshi Farmers | CSE347 Project
+Made with for Bangladeshi Farmers
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1B5E20,100:2E7D32&height=100&section=footer" width="100%"/>
 
