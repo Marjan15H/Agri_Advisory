@@ -156,7 +156,7 @@ flowchart LR
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2E8B57,100:006A4E&height=120&section=footer"/>
 
 ### 🌍 Live Deployment
-**🔗 [agriadvisory.app](http://agriadvisory.app)**
+**🔗 [agriadvisory](https://agri-advisory-web-f8d0cfduauaqf5a5.malaysiawest-01.azurewebsites.net/)**
 
 Made with for Bangladeshi Farmers
 
