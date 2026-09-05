@@ -2,13 +2,13 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:006A4E,100:2E8B57&height=200&section=header&text=Smart%20Agri-Advisory%20Platform&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=AI-Powered%20Crop%20and%20Input%20Recommendation%20System%20for%20Bangladeshi%20Farmers&descAlignY=55&descSize=18" width="100%"/>
 
-<a href="http://agriadvisory.app">
+<a href="https://agri-advisory-web-f8d0cfduauaqf5a5.malaysiawest-01.azurewebsites.net/">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=2E8B57&center=true&vCenter=true&width=700&lines=Role-Based+(RBAC)+Web+Platform+%F0%9F%8C%BE;Analyzes+Soil%2C+Weather%2C+and+Historical+Data;Recommends+Crops%2C+Fertilizer%2C+Market+Timing%2C+and+More;Built+for+Bangladeshi+Farmers+%F0%9F%87%A7%F0%9F%87%A9" alt="Typing SVG" />
 </a>
 
 <br/>
 
-🔗 **Live:** [agriadvisory.app](http://agriadvisory.app)
+🔗 **Live:** [agriadvisory](https://agri-advisory-web-f8d0cfduauaqf5a5.malaysiawest-01.azurewebsites.net/)
 
 <p>
   <img src="https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"/>
